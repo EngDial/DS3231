@@ -1,11 +1,3 @@
-/*
-  DS3231: Real-Time Clock. Date Format
-  Read more: www.jarzebski.pl/arduino/komponenty/zegar-czasu-rzeczywistego-rtc-ds3231.html
-  GIT: https://github.com/jarzebski/Arduino-DS3231
-  Web: http://www.jarzebski.pl
-  (c) 2014 by Korneliusz Jarzebski
-*/
-
 #include <Wire.h>
 #include <DS3231.h>
 
@@ -15,19 +7,17 @@ RTCDateTime dt;
 void setup()
 {
   Serial.begin(9600);
-
   // Initialize DS3231
   Serial.println("Initialize DS3231");;
   clock.begin();
-
   // Set sketch compiling time
-  clock.setDateTime(__DATE__, __TIME__);
+  //clock.setDateTime(__DATE__, __TIME__);
 
   // Set from UNIX timestamp
-  // clock.setDateTime(1397408400);
+  // clock.setDateTime(1500275827);
 
   // Manual (YYYY, MM, DD, HH, II, SS
-  // clock.setDateTime(2014, 4, 13, 19, 21, 00);
+  // clock.setDateTime(2017, 7, 17, 7, 17, 7);
 }
 
 void loop()
@@ -56,6 +46,5 @@ void loop()
 
   Serial.println();
 
-  delay(1000);
+  delay(1000); // 1sec
 }
-
