@@ -3,7 +3,7 @@ Arduino-DS3231
 
 DS3231 Real-Time Clock.
 
-Developed by [jarzebski]()
+Developed by [jarzebski](https://github.com/jarzebski)
 
 Date formats (Day)
 ------------------
