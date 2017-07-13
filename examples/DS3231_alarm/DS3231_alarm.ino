@@ -1,11 +1,3 @@
-/*
-  DS3231: Real-Time Clock. Alarm simple
-  Read more: www.jarzebski.pl/arduino/komponenty/zegar-czasu-rzeczywistego-rtc-DS3231.html
-  GIT: https://github.com/jarzebski/Arduino-DS3231
-  Web: http://www.jarzebski.pl
-  (c) 2014 by Korneliusz Jarzebski
-*/
-
 #include <Wire.h>
 #include <DS3231.h>
 
@@ -15,21 +7,17 @@ RTCDateTime dt;
 void setup()
 {
   Serial.begin(9600);
-  
   // Initialize DS3231
   Serial.println("Initialize DS3231");;
   clock.begin();
-
   // Disarm alarms and clear alarms for this example, because alarms is battery backed.
   // Under normal conditions, the settings should be reset after power and restart microcontroller.
   clock.armAlarm1(false);
   clock.armAlarm2(false);
   clock.clearAlarm1();
   clock.clearAlarm2();
- 
   // Manual (Year, Month, Day, Hour, Minute, Second)
-  clock.setDateTime(2014, 4, 25, 0, 0, 0);
-
+  clock.setDateTime(2017, 7, 17, 7, 17, 7);
   // Set Alarm - Every second.
   // DS3231_EVERY_SECOND is available only on Alarm1.
   // setAlarm1(Date or Day, Hour, Minute, Second, Mode, Armed = true)
@@ -70,15 +58,15 @@ void setup()
 
 void checkAlarms()
 {
-  RTCAlarmTime a1;  
-  RTCAlarmTime a2;
+RTCAlarmTime a1;  
+RTCAlarmTime a2;
 
-  if (clock.isArmed1())
+  if ( clock.isArmed1() )
   {
     a1 = clock.getAlarm1();
 
     Serial.print("Alarm1 is triggered ");
-    switch (clock.getAlarmType1())
+    switch ( clock.getAlarmType1() )
     {
       case DS3231_EVERY_SECOND:
         Serial.println("every second");
@@ -107,17 +95,16 @@ void checkAlarms()
         Serial.println("UNKNOWN RULE");
         break;
     }
-  } else
-  {
+  } 
+  else
     Serial.println("Alarm1 is disarmed.");
-  }
 
-  if (clock.isArmed2())
+  if ( clock.isArmed2() )
   {
     a2 = clock.getAlarm2();
 
     Serial.print("Alarm2 is triggered ");
-    switch (clock.getAlarmType2())
+    switch ( clock.getAlarmType2() )
     {
       case DS3231_EVERY_MINUTE:
         Serial.println("every minute");
@@ -142,31 +129,22 @@ void checkAlarms()
         Serial.println("UNKNOWN RULE"); 
         break;
     }
-  } else
-  {
+  } 
+  else
     Serial.println("Alarm2 is disarmed.");
-  }
 }
 
 void loop()
 {
   dt = clock.getDateTime();
-
   Serial.println(clock.dateFormat("d-m-Y H:i:s - l", dt));
-
   // Call isAlarm1(false) if you want clear alarm1 flag manualy by clearAlarm1();
-  if (clock.isAlarm1())
-  {
+  if ( clock.isAlarm1() )
     Serial.println("ALARM 1 TRIGGERED!");
-  }
-
   // Call isAlarm2(false) if you want clear alarm1 flag manualy by clearAlarm2();
-  if (clock.isAlarm2())
-  {
+  if ( clock.isAlarm2() )
     Serial.println("ALARM 2 TRIGGERED!");
-  }
- 
-  delay(1000);
+  delay(1000); // 1sec
 }
 
 
