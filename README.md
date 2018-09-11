@@ -1,5 +1,5 @@
-Arduino-DS3231
-==============
+Arduino - DS3231
+================
 
 DS3231 Real-Time Clock.
 
